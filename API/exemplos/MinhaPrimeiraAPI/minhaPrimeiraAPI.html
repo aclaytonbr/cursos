@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Financeira</title>
+</head>
+<body>
+  
+
+  <script>
+    // Substitua 'YOUR_API_KEY' pela chave de API fornecida pelo ExchangeRate-API
+    const apiKey = `a094f67928d1a2e49003eaf7`;
+    const apiUrl = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`
+
+    // Função para fazer a solicitação à API
+    async function fetchExchangeRate() {
+      try { 
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+
+        // Extraindo a taxa de câmbio de USD para REAL
+        const exchangeRate = data.conversion_rates.BRL;
+        const number_of_tickets = Object.keys(data.conversion_rates).length;
+
+        // Atualizando o conteúdo da página
+        document.getElementById('exchange-resp').innerHTML = `Taxa de câmbio: USD 1 = R$ ${exchangeRate}`;
+      } catch (error) {
+        console.error('Erro ao acessar a API:', error);
+      }
+    }
+
+  </script>
+
+  <h1>Taxa de Câmbio USD para EUR</h1>
+
+  <div id="exchange-rate">
+    <button name="btnExchange" onclick="fetchExchangeRate()">Chamar API</button>
+    <div id="exchange-resp"></div>
+  </div>
+
+</body>
+</html>
