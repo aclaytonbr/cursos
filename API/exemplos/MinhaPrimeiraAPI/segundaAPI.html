@@ -9,9 +9,13 @@
   
 
   <script>
-    // Substitua 'YOUR_API_KEY' pela chave de API fornecida pelo ExchangeRate-API
-    const apiKey = `a094f67928d1a2e49003eaf7`;
-    const apiUrl = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`
+    // Substitua 'YOUR_API_KEY' pela chave de API fornecida pelo ExchangeRate-AP
+    const pokemon = `pikachu`
+    const cep = `69060000`
+    //const apiUrl = `https://pokeapi.co/api/v2/pokemon/${pokemon}`
+    const apiUrl = `https://viacep.com.br/ws/${cep}`
+
+
 
     // Função para fazer a solicitação à API
     async function fetchExchangeRate() {
@@ -20,11 +24,11 @@
         const data = await response.json();
 
         // Extraindo a taxa de câmbio de USD para REAL
-        const exchangeRate = data.conversion_rates.BRL;
-        const number_of_tickets = Object.keys(data.conversion_rates).length;
 
         // Atualizando o conteúdo da página
-        document.getElementById('exchange-resp').innerHTML = `Taxa de câmbio: USD 1 = R$ ${exchangeRate}`;
+        const primeira_habilidade = data.abilities[1].ability
+        document.getElementById('exchange-resp').innerHTML = data.endereco;
+
       } catch (error) {
         console.error('Erro ao acessar a API:', error);
       }
