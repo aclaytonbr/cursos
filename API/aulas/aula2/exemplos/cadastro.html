@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário e Tabela</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Formulário de Dados</h1>
+
+    <form id="formulario">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required><br>
+
+        <label for="cargo">Cargo:</label>
+        <input type="text" id="cargo" name="cargo" required><br>
+
+        <label for="estadoCivil">Estado Civil:</label>
+        <select id="estadoCivil" name="estadoCivil" required>
+            <option value="casado">Casado</option>
+            <option value="solteiro">Solteiro</option>
+        </select><br>
+
+        <label for="dependentes">Dependentes:</label>
+        <input type="number" id="dependentes" name="dependentes" required><br>
+
+        <label for="salario_bruto">Salário Bruto:</label>
+        <input type="number" id="salario_bruto" name="salario_bruto" required><br>
+
+        <button type="button" onclick="incluirDados()">Incluir</button>
+    </form>
+
+    <h2>Dados Incluídos</h2>
+
+    <table id="tabela">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cargo</th>
+                <th>Estado Civil</th>
+                <th>Previdencia</th>
+                <th>Imposto de Renda</th>
+                <th>Outras deduções</th>
+                <th>Salario Líquido</th>
+            </tr>
+        </thead>
+        <tbody id="tabelaCorpo"></tbody>
+    </table>
+
+    <script>
+
+        function calcularPrevidencia(salario_bruto) {
+            // Faixas de alíquota e deduções
+            const faixas = [1302, 2571.29, 3856.94, 7507.49];
+            const aliquotas = [0.075, 0.09, 0.12, 0.14];
+            const parcelas = [0, 1269.29, 1285.65, 3650.55];
+        
+            // Inicializar o previdencia
+            let previdencia = 0.0;
+            let i = 0;
+            // Iterar sobre as faixas
+            for (i ; i < faixas.length; i++) {
+                if (salario_bruto <= faixas[i]) {
+                    previdencia += (salario_bruto - faixas[i-1]) * aliquotas[i];                    
+                    break;
+                } else {
+                    if (parcelas[i] == 0) {
+                        previdencia += (faixas[i] * aliquotas[i]);
+                    } else {
+                        previdencia += (parcelas[i] * aliquotas[i]);
+                    }
+                    
+                }
+            }
+        
+            // Garantir que o imposto não seja negativo
+            previdencia = Math.max(previdencia, 0);
+        
+            return previdencia.toFixed(2);
+        }
+
+        function calcularImpostoDeRenda(salario_bruto, deducoes) {
+            
+            // Faixas de alíquota e deduções
+            const faixas = [2269.20, 2826.65, 3751.05, 4664.68];
+            const aliquotas = [0.0, 0.075, 0.15, 0.225, 0.275];
+            const parcelas = [0, 169.44, 381.44,662.77,896.00];
+        
+            //retira as deduções do salário
+            
+            base = salario_bruto - deducoes;
+            
+            if (base > 0 && base <= 2269.20) {
+                imposto = 0;
+            } else if (base > 2269.20 && base <= 2826.65) {
+                imposto = (base * 0.075) - 158.40;
+            } else if (base > 2826.65 && base <= 3751.05) {
+                imposto = (base * 0.15) - 370.40;
+            } else if (base > 3751.05 && base <= 4664.68) {
+                imposto = (base * 0.225) - 370.40;
+            } else if (base > 4664.68) {
+                imposto = (base * 0.275) - 896;
+            }
+        
+            imposto = Math.max(imposto, 0);
+        
+            return imposto.toFixed(2);
+        }
+        
+        function incluirDados() {
+
+            //estabelece os valores de aliquotas de previdencia e imposto de renda
+            const aliquota_previdencia = 12/100;
+
+            // Obter os valores dos campos do formulário
+            var nome = document.getElementById("nome").value;
+            var cargo = document.getElementById("cargo").value;
+            var estadoCivil = document.getElementById("estadoCivil").value;
+            var salario_bruto = document.getElementById("salario_bruto").value;
+            var previdencia = calcularPrevidencia(salario_bruto);
+            var deducoes = parseFloat(previdencia) + (parseFloat(document.getElementById("dependentes").value) * 189.59);
+            var imposto = calcularImpostoDeRenda(parseFloat(salario_bruto), parseFloat(deducoes));
+            var salario_liquido = parseFloat(salario_bruto) - parseFloat(previdencia) - parseFloat(imposto);
+            
+
+            // Criar uma nova linha na tabela
+            var tabela = document.getElementById("tabelaCorpo");
+            var novaLinha = tabela.insertRow(tabela.rows.length);
+
+            // Inserir células com os valores do formulário
+            var celulaNome = novaLinha.insertCell(0);
+            var celulaCargo = novaLinha.insertCell(1);
+            var celulaEstadoCivil = novaLinha.insertCell(2);
+            var celulaPrevidencia = novaLinha.insertCell(3);
+            var celulaImposto = novaLinha.insertCell(4);
+            var celulaDeducoes = novaLinha.insertCell(5);
+            var celulaSalarioLiquido = novaLinha.insertCell(6);
+            
+
+            celulaNome.innerHTML = nome;
+            celulaCargo.innerHTML = cargo;
+            celulaEstadoCivil.innerHTML = estadoCivil;
+            celulaPrevidencia.innerHTML = previdencia;
+            celulaImposto.innerHTML = imposto;
+            celulaDeducoes.innerHTML = deducoes;
+            celulaSalarioLiquido.innerHTML = salario_liquido
+            
+            
+
+            // Limpar os campos do formulário
+            document.getElementById("formulario").reset();
+        }
+    </script>
+
+</body>
+</html>

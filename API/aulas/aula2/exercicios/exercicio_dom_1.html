@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício de DOM</title>
+    <style>
+        .concluido {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Lista de Tarefas</h2>
+
+    <ul id="listaTarefas">
+        <li id="tarefa1" class="tarefa">Estudar JavaScript</li>
+        <li id="tarefa2" class="tarefa">Praticar HTML e CSS</li>
+        <li id="tarefa3" class="tarefa">Resolver exercícios de DOM</li>
+    </ul>
+
+    <button onclick="concluirTarefa()">Concluir Tarefa</button>
+
+    <script>
+        function concluirTarefa() {
+            // Selecione o elemento com id "tarefa2" e adicione a classe "concluido"
+            const tarefa2 = document.getElementById('tarefa2');
+            tarefa2.classList.add('concluido');
+
+            // Selecione todos os elementos com a classe "tarefa" e altere seu estilo
+            const todasAsTarefas = document.getElementsByClassName('tarefa');
+            for (let i = 0; i < todasAsTarefas.length; i++) {
+                todasAsTarefas[i].style.color = 'green';
+            }
+
+            // Selecione o primeiro elemento <li> dentro da lista e mude seu conteúdo
+            const primeiroItemDaLista = document.getElementsByTagName('li')[0];
+            primeiroItemDaLista.textContent = 'Revisar o Exercício de DOM';
+        }
+    </script>
+
+</body>
+</html>

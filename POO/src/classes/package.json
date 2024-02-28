@@ -1,0 +1,15 @@
+{
+  "rootDir": "typescript",
+  "scripts": {
+    "build": "tsc",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "format": "prettier --write \"**/*.ts\" \"**/*.ts\"",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\""
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

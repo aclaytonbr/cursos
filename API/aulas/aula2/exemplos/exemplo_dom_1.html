@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Acesso ao DOM</title>
+</head>
+<body>
+
+    <h2 id="titulo">Bem-vindo ao DOM!</h2>
+
+    <p class="paragrafo">Este é um parágrafo com uma classe.</p>
+
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+
+    <button onclick="alterarConteudo()">Alterar Conteúdo</button>
+
+    <script>
+        function alterarConteudo() {
+            
+            // Utilizando getElementById para acessar o título
+            const tituloElemento = document.getElementById('titulo');
+            tituloElemento.textContent = 'Conteúdo Alterado!';
+
+            // Utilizando getElementsByClassName para acessar o parágrafo
+            const paragrafoElementos = document.getElementsByClassName('paragrafo');
+            for (const paragrafo of paragrafoElementos) {
+                paragrafo.textContent = 'Parágrafo alterado!';
+            }
+
+            // Utilizando getElementsByTagName para acessar os itens da lista
+            const itensLista = document.getElementsByTagName('li');
+            for (const item of itensLista) {
+                if (item.textContent === "Item 2") {
+                    //item.textContent = 'Item Alterado';
+                    item.style = "color: red;"
+                }   
+            }
+        }
+    </script>
+</body>
+</html>
