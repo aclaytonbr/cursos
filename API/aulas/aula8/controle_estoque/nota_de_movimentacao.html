@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Notas de Movimentação de Mercadorias</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Cadastro de Notas de Movimentação de Mercadorias</h1>
+
+    <form id="formulario">
+        <label for="numeroNota">Número da Nota:</label>
+        <input type="text" id="numeroNota" disabled>
+        
+        <label for="dataNota">Data da Nota:</label>
+        <input type="date" id="dataNota" required>
+
+        <label for="responsavelNota">Responsável pela Nota:</label>
+        <input type="text" id="responsavelNota" maxlength="50" required>
+
+        <label for="tipoNota">Tipo da Nota:</label>
+        <select id="tipoNota" required>
+            <option value="">Selecione</option>
+            <option value="entrada">Entrada</option>
+            <option value="saida">Saída</option>
+        </select>
+
+        <h2>Itens da Nota</h2>
+        <table id="tabelaItens">
+            <tr>
+                <th>Código</th>
+                <th>Descrição</th>
+                <th>Valor Unitário</th>
+                <th>Quantidade</th>
+                <th>Valor Total</th>
+            </tr>
+        </table>
+
+        <button type="button" onclick="adicionarItem()">Adicionar Item</button>
+
+        <label for="valorNota">Valor da Nota:</label>
+        <input type="text" id="valorNota" disabled>
+
+        <button type="submit">Cadastrar Nota</button>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>

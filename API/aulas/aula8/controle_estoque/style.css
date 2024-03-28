@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+form {
+    width: 80%;
+    margin: 0 auto;
+}
+
+label, input, select, button {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#tabelaItens {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#tabelaItens th, #tabelaItens td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#tabelaItens th {
+    background-color: #f2f2f2;
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"biblioteca.js","sourceRoot":"","sources":["../../model/biblioteca.ts"],"names":[],"mappings":";AAAA,MAAM,UAAU;IAGZ,YAAY,MAAe;QACvB,IAAI,CAAC,MAAM,GAAG,MAAM,CAAC;IACzB,CAAC;CACJ;AAED,MAAM,KAAK;IAIP,+BAA+B;IAC/B,YAAY,MAAc,EAAE,KAAa;QACrC,IAAI,CAAC,OAAO,GAAG,MAAM,CAAC;QACtB,IAAI,CAAC,MAAM,GAAG,KAAK,CAAC;IACxB,CAAC;CACJ"}
