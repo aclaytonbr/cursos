@@ -1,0 +1,26 @@
+{
+  "name": "controle-bancario",
+  "version": "1.0.1",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start": "NODE_ENV=development nest start --watch",
+    "start:dev": "NODE_ENV=development nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/app"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "prettier": "^3.2.5"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.3"
+  },
+  "main": "app.js",
+  "keywords": [],
+  "description": ""
+}
