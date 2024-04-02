@@ -5,4 +5,5 @@ class DataBase {
 }
 exports.DataBase = DataBase;
 DataBase.bancos = [];
+DataBase.clientes = [];
 //# sourceMappingURL=database.js.map

@@ -31,17 +31,19 @@ const dotenv = __importStar(require("dotenv"));
 const path = __importStar(require("path"));
 //importação de rotas
 const banco_router_1 = __importDefault(require("./route/banco-router"));
+const cliente_router_1 = __importDefault(require("./route/cliente-router"));
 //carrega as variáveis de ambiente
 const envPath = path.join(__dirname, '..', '.env');
 dotenv.config({ path: envPath });
 const PORT = process.env.PORT || 3000;
 //instancia o servidor
 const app = (0, express_1.default)();
+//carrega as rotas no servidor
 app.use(express_1.default.json());
-app.use('/api/bancos', banco_router_1.default);
-app.get('/api', (req, res) => {
-    res.send("Bem vindo a api bancária");
-});
+app.get('/api', (req, res) => { res.send("Bem vindo a api bancária"); });
+app.use('/api/banco', banco_router_1.default);
+app.use('/api/cliente', cliente_router_1.default);
+//coloca o servidor em modo de espera de requisições
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
 });

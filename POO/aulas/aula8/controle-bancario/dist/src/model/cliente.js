@@ -1,20 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Cliente = void 0;
+const database_1 = require("../database/database");
 const pessoa_1 = require("./pessoa");
 class Cliente extends pessoa_1.Pessoa {
-    constructor(nome, dataNascimento, cpf, estadoCivil) {
-        super(nome, dataNascimento);
-        this._cpf = cpf;
-        this._estadoCivil = estadoCivil;
+    constructor() {
+        super();
+        this.codigo = '';
+        this.nome = '';
+        this.dataNascimento = '';
+        this._cpf = '';
+        this._estadoCivil = '';
         this._contas = [];
     }
-    get nome() {
-        return this.nome;
-    }
-    get dataNascimento() {
-        return this.dataNascimento;
-    }
+    //getters
     get cpf() {
         return this._cpf;
     }
@@ -23,6 +22,29 @@ class Cliente extends pessoa_1.Pessoa {
     }
     get contas() {
         return this._contas;
+    }
+    //setters
+    set cpf(cpf) {
+        this._cpf = cpf;
+    }
+    set estadoCivil(estadoCivil) {
+        this._estadoCivil = estadoCivil;
+    }
+    incluir(cliente) {
+        const novoCliente = new Cliente();
+        novoCliente.codigo = cliente.codigo;
+        novoCliente.nome = cliente.nome;
+        novoCliente.dataNascimento = cliente.dataNascimento;
+        novoCliente.cpf = cliente.cpf;
+        novoCliente.estadoCivil = cliente.estadoCivil;
+        database_1.DataBase.clientes.push(novoCliente);
+        return novoCliente;
+    }
+    listar() {
+        return database_1.DataBase.clientes;
+    }
+    buscarPorCodigo(codigo) {
+        return database_1.DataBase.clientes.find(cliente => cliente.codigo === codigo);
     }
 }
 exports.Cliente = Cliente;

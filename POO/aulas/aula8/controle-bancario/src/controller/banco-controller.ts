@@ -33,7 +33,6 @@ export class BancoController {
     }
 
     public atualizarBanco(req: Request, res: Response): void {
-        
         const codigo = <string> req.query.id;
         const banco: IBanco = req.body;
 
@@ -42,7 +41,6 @@ export class BancoController {
         } else {
             res.json({ message: 'Erro ao tentar atualizar o banco' });
         }
-
     }
 
     public delete(req: Request, res: Response): void {
