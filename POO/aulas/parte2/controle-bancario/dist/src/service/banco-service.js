@@ -76,7 +76,7 @@ class BancoService {
                 }
             }
             catch (error) {
-                throw new Error('Erro ao atualizar email do usuário: ' + error.message);
+                throw new Error('Erro ao atualizar banco: ' + error.message);
             }
         });
     }
@@ -95,7 +95,7 @@ class BancoService {
                 }
             }
             catch (error) {
-                throw new Error('Erro ao atualizar email do usuário: ' + error.message);
+                throw new Error('Erro ao excluir banco: ' + error.message);
             }
         });
     }

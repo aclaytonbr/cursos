@@ -39,7 +39,7 @@ Agencia.init({
     sequelize: sequelize_2.default,
     modelName: 'Agencia',
     tableName: 'tbl_agencia',
-    timestamps: false
+    timestamps: false,
 });
 exports.default = Agencia;
 //# sourceMappingURL=agencia.js.map

@@ -10,6 +10,9 @@ const bancoController = new banco_controller_1.BancoController();
 bancoRouter.get('/', (req, res) => {
     bancoController.listarTodos(req, res);
 });
+bancoRouter.get('/buscar', (req, res) => {
+    bancoController.buscarBancoPorCodigo(req, res);
+});
 bancoRouter.post('/criar/', (req, res) => {
     bancoController.criarBanco(req, res);
 });

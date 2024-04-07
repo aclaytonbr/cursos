@@ -40,12 +40,25 @@ const dotenv = __importStar(require("dotenv"));
 const path = __importStar(require("path"));
 const sequelize_1 = __importDefault(require("./database/sequelize/sequelize"));
 const app_router_1 = __importDefault(require("./route/app-router"));
+const cors_1 = __importDefault(require("cors"));
 //carrega as variáveis de ambiente
 const envPath = path.join(__dirname, '..', '.env');
 dotenv.config({ path: envPath });
 const PORT = process.env.PORT || 3000;
 //instancia o servidor
 const app = (0, express_1.default)();
+//configura o CORS
+//permite todos os métodos e cabeçalhos
+app.use((0, cors_1.default)({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+// Middleware para definir o cabeçalho Content-Type em todas as respostas
+app.use((req, res, next) => {
+    res.setHeader('Content-Type', 'application/json');
+    next();
+});
 //carrega as rotas no servidor
 app.use(express_1.default.json());
 app.get('/api', (req, res) => { res.send("Bem vindo a api bancária"); });
@@ -54,16 +67,21 @@ function initialize() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield sequelize_1.default.authenticate();
-            console.log('Connection to the database has been established successfully.');
+            console.log('A conexão com o banco de dados foi estabelecida com sucesso');
             // Sincroniza os models com o database
             yield sequelize_1.default.sync({ alter: true });
+        }
+        catch (erro) {
+            throw new Error("Não foi possível estabelecer conexão com o banco de dados: " + erro.message);
+        }
+        try {
             //coloca o servidor em modo de espera de requisições
             app.listen(PORT, () => {
                 console.log(`Servidor rodando em http://localhost:${PORT}`);
             });
         }
-        catch (error) {
-            console.error('Não foi possível conectar com o banco de dados:', error);
+        catch (erro) {
+            throw new Error("Não foi possível iniciar o servidor de API: " + erro.message);
         }
     });
 }

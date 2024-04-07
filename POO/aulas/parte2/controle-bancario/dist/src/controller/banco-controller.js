@@ -47,9 +47,9 @@ class BancoController {
     }
     buscarBancoPorCodigo(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const chave = req.query.codigo;
             try {
-                const { codigo } = req.params;
-                const banco = yield this.bancoService.buscarPorCodigo(codigo);
+                const banco = yield this.bancoService.buscarPorCodigo(chave);
                 if (banco) {
                     res.status(200).json(banco);
                 }

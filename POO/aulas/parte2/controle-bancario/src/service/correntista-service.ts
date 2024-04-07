@@ -1,4 +1,3 @@
-import { DataBase } from "../database/database";
 import { ICorrentista } from "../interface/correntista-interface";
 import Correntista from "../model/correntista";
 
