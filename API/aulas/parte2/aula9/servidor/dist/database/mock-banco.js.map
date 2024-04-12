@@ -1,0 +1,1 @@
+{"version":3,"file":"mock-banco.js","sourceRoot":"","sources":["../../database/mock-banco.ts"],"names":[],"mappings":";;;AACa,QAAA,MAAM,GAAI;IACnB;QACI,MAAM,EAAE,KAAK;QACb,IAAI,EAAE,iBAAiB;KAC1B;IACD;QACI,MAAM,EAAE,KAAK;QACb,IAAI,EAAE,UAAU;KACnB;CACJ,CAAA"}

@@ -1,12 +1,14 @@
 
-const formulario = document.getElementById('meuFormulario');
-const buscarBtn = document.getElementById('buscarBtn');
-const resultado = document.getElementById('resultado');
 const txtCodigo = document.getElementById('codigo');
 const txtNome = document.getElementById('nome');
-document.getElementsByClassName
-formulario.addEventListener('submit', function(event) {
-    event.preventDefault(); // Evita o envio padrão do formulário
+
+const criarBtn =  document.getElementById('criarBtn')
+const buscarBtn = document.getElementById('buscarBtn');
+
+const resultado = document.getElementById('resultado');
+
+
+criarBtn.addEventListener('click', function(event) {
 
     const codigo = document.getElementById('codigo').value;
     const nome = document.getElementById('nome').value;
@@ -26,7 +28,7 @@ buscarBtn.addEventListener('click', function() {
 });
 
 // Função para enviar dados para a API (exemplo)
-function enviarDadosParaAPI(codigo, nome) {
+async function enviarDadosParaAPI(codigo, nome) {
     
     //monta o json para ser enviado
     let data = {
@@ -76,5 +78,4 @@ async function buscarDadosNaAPI(codigo_banco) {
       } catch (error) {
         console.error('Erro ao acessar a API:', error);
       }
-    
 }

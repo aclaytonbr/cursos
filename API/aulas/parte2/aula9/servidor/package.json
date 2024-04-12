@@ -1,21 +1,48 @@
 {
 
   "scripts": {
+
     "build": "tsc",
+
     "start": "ts-node src/app.ts",
+
     "start:debug": "ts-node --inspect --require ts-node/register src/app.ts",
+
     "test": "echo \"Error: no test specified\" && exit 1"
+
   },
+
   "keywords": [],
+
   "author": "",
+
   "license": "ISC",
+
   "devDependencies": {
+
     "@nestjs/schematics": "^10.1.1",
+
+    "@types/cors": "^2.8.17",
+
     "@types/express": "^4.17.21",
+
     "ts-node": "^10.9.2",
+
     "typescript": "^5.4.4"
+
   },
+
   "dependencies": {
-    "express": "^4.19.2"
+
+    "cors": "^2.8.5",
+
+    "express": "^4.19.2",
+
+    "mysql2": "^3.9.4",
+
+    "sequelize": "^6.37.2"
+
   }
+
 }
+
