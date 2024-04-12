@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const banco_controller_1 = require("../controller/banco-controller");
 const bancoRouter = express_1.default.Router();
 const bancoController = new banco_controller_1.BancoController();
-bancoRouter.post('/criar/', (req, res) => {
+bancoRouter.post('/criar', (req, res) => {
     bancoController.criarBanco(req, res);
 });
 bancoRouter.get('/', (req, res) => {

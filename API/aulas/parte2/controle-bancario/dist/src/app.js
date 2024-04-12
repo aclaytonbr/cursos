@@ -39,8 +39,7 @@ const express_1 = __importDefault(require("express"));
 const dotenv = __importStar(require("dotenv"));
 const path = __importStar(require("path"));
 const sequelize_1 = __importDefault(require("./database/sequelize/sequelize"));
-const app_router_1 = __importDefault(require("./route/app-router"));
-const cors_1 = __importDefault(require("cors"));
+const app_router_1 = __importDefault(require("./router/app-router"));
 //carrega as variáveis de ambiente
 const envPath = path.join(__dirname, '..', '.env');
 dotenv.config({ path: envPath });
@@ -49,14 +48,16 @@ const PORT = process.env.PORT || 3000;
 const app = (0, express_1.default)();
 //configura o CORS
 //permite todos os métodos e cabeçalhos
-app.use((0, cors_1.default)({
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}));
+// app.use(cors({
+//     origin: '*',
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     allowedHeaders: ['Content-Type', 'application/json']
+//   }));
 // Middleware para definir o cabeçalho Content-Type em todas as respostas
 app.use((req, res, next) => {
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Ou substitua '*' pela origem permitida
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 });
 //carrega as rotas no servidor
@@ -65,17 +66,17 @@ app.get('/api', (req, res) => { res.send("Bem vindo a api bancária"); });
 app_router_1.default.carregarRotas(app);
 function initialize() {
     return __awaiter(this, void 0, void 0, function* () {
+        // Tenta conectar a aplicação com o gerenciador de banco de dados
         try {
             yield sequelize_1.default.authenticate();
             console.log('A conexão com o banco de dados foi estabelecida com sucesso');
-            // Sincroniza os models com o database
             yield sequelize_1.default.sync({ alter: true });
         }
         catch (erro) {
             throw new Error("Não foi possível estabelecer conexão com o banco de dados: " + erro.message);
         }
+        //Coloca o servidor em modo de espera de requisições
         try {
-            //coloca o servidor em modo de espera de requisições
             app.listen(PORT, () => {
                 console.log(`Servidor rodando em http://localhost:${PORT}`);
             });

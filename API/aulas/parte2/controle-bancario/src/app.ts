@@ -2,7 +2,7 @@ import express,  {Request, Response } from 'express'
 import * as dotenv from 'dotenv'
 import * as path from 'path'
 import sequelize from './database/sequelize/sequelize';
-import appRouter from './route/app-router';
+import appRouter from './router/app-router';
 import cors from 'cors';
 
 //carrega as variáveis de ambiente
@@ -13,17 +13,12 @@ const PORT = process.env.PORT || 3000;
 //instancia o servidor
 const app = express();
 
-//configura o CORS
-//permite todos os métodos e cabeçalhos
-app.use(cors({
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-  }));
 
 // Middleware para definir o cabeçalho Content-Type em todas as respostas
 app.use((req, res, next) => {
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Ou substitua '*' pela origem permitida
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
   });
 
@@ -34,18 +29,17 @@ appRouter.carregarRotas(app);
 
 async function initialize() {
     
+    // Tenta conectar a aplicação com o gerenciador de banco de dados
     try {
         await sequelize.authenticate();
         console.log('A conexão com o banco de dados foi estabelecida com sucesso');
-        
-        // Sincroniza os models com o database
         await sequelize.sync({ alter: true });
     } catch (erro: any) {
         throw new Error("Não foi possível estabelecer conexão com o banco de dados: " + erro.message);
     }
 
+    //Coloca o servidor em modo de espera de requisições
     try {    
-        //coloca o servidor em modo de espera de requisições
         app.listen(PORT, () => {
             console.log(`Servidor rodando em http://localhost:${PORT}`);
         });

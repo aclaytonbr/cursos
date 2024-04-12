@@ -10,13 +10,13 @@ class Banco extends sequelize_1.Model {
 Banco.init({
     id: {
         type: sequelize_1.DataTypes.INTEGER.UNSIGNED,
-        autoIncrement: true,
+        //autoIncrement: true,
         primaryKey: true
     },
     codigo: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-        unique: true
+        //unique: true
     },
     nome: {
         type: sequelize_1.DataTypes.STRING,

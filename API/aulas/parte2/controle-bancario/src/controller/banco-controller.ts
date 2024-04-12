@@ -8,6 +8,7 @@ export class BancoController {
     private bancoService: BancoService = new BancoService();
 
     public async criarBanco(req: Request, res: Response) {
+
         try {
             const novoBanco: IBanco = req.body;
             await this.bancoService.incluir(novoBanco.codigo, novoBanco.nome);

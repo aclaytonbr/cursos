@@ -10,13 +10,13 @@ class Banco extends Model {
 Banco.init ({
     id: {
         type: DataTypes.INTEGER.UNSIGNED,
-        autoIncrement: true,
+        //autoIncrement: true,
         primaryKey: true
     },
     codigo: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
+        //unique: true
     },
     nome: {
         type: DataTypes.STRING,

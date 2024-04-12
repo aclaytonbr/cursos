@@ -7,7 +7,7 @@ const PASSWORD = process.env.PASSWORD || 'banco2024';
 const sequelize = new sequelize_1.Sequelize(DATA_BASE_NAME, USER_NAME, PASSWORD, {
     host: 'localhost',
     dialect: 'mysql',
-    logging: false
+    logging: false,
 });
 exports.default = sequelize;
 //# sourceMappingURL=sequelize.js.map

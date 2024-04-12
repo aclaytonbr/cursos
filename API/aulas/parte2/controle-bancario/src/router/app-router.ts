@@ -1,7 +1,7 @@
 import {Request, Response } from 'express'
 
 //importação de rotas
-import bancoRouter from "../route/banco-router";
+import bancoRouter from "./banco-router";
 //import agenciaRouter from '../route/agencia-router';
 //import correntistaRouter from '../route/correntista-router';
 //import contaRouter from '../route/conta-router';
